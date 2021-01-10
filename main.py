@@ -19,26 +19,26 @@ class Multimeter():
 class FileTypeAdapter:
     _initialised = False
 
-    def __init__(self, fileType, **adapted_methods):
+    def __init__(self, fileTypeFunction, **adapted_methods):
         super().__init__()
-        self.fileType = fileType
+        self.fileTypeFunction = fileTypeFunction
 
         for key, value in adapted_methods.items():
-            func = getattr(self.fileType, value)
+            func = getattr(self.fileTypeFunction, value)
             self.__setattr__(key, func)
 
         self._initialised = True
 
     def __getattr__(self, attr):
-        return getattr(self.fileType, attr)
+        return getattr(self.fileTypeFunction, attr)
 
     def __setattr__(self, key, value):
         """Set attributes normally during initialisation"""
         if not self._initialised:
             super().__setattr__(key, value)
         else:
-            """Set attributes on fileType after initialisation"""
-            setattr(self.fileType, key, value)
+            """Set attributes on fileTypeFunction after initialisation"""
+            setattr(self.fileTypeFunction, key, value)
 
 
 class FileTypeFacade:

@@ -41,5 +41,5 @@ class FileTypeAdapter:
         if not self._initialised:
             super().__setattr__(key, value)
         else:
-            """Set attributes on fileType after initialisation"""
+            """Set attributes on fileTypeFunction after initialisation"""
             setattr(self.fileTypes, key, value)
