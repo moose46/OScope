@@ -41,8 +41,13 @@ class Creator(ABC):
 
     def some_operation(self) -> str:
         product = self.factory_method()
-        result = f"Creator: The same creator's code has jst worked with {product.operation()}"
+        result = f"Creator: The same creator's code has just worked with {product.operation()}"
+
         return result
+
+    def hello(self) -> str:
+        message = self.factory_method()
+        return "{message.hello()}"
 
 
 """
@@ -77,15 +82,25 @@ class Product(ABC):
     def operation(self) -> str:
         pass
 
+    @abstractmethod
+    def hello(self) -> str:
+        pass
+
 
 class ConcreteProduct1(Product):
     def operation(self) -> str:
         return "{Result of the ConcreteProduct1}"
 
+    def hello(self) -> str:
+        return "Hello 1"
+
 
 class ConcreteProduct2(Product):
     def operation(self) -> str:
         return "{Result of the ConcreteProduct2}"
+
+    def hello(self) -> str:
+        return "Hello 2"
 
 
 def client_code(creator: Creator) -> None:
